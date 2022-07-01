@@ -56,7 +56,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
 	// product id between 0 and 100 ok
 	// id > 100 => Error 404
-	const result = range(100);
+	const result = range(1, 100);
 	const paths = result.map((product) => {
 		return {
 			params: {
