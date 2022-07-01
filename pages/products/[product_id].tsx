@@ -33,7 +33,7 @@ const Post = (props) => {
 					})}
 				</div>
 
-				<div class="flex flex-row items-center justify-center pt-4 gap-4">
+				<div className="flex flex-row items-center justify-center pt-4 gap-4">
 					<Button type="primary">Previous</Button>
 					<Button type="primary">Next</Button>
 				</div>
@@ -56,7 +56,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
 	// product id between 0 and 100 ok
 	// id > 100 => Error 404
-	const result = range(0, 100);
+	const result = range(100);
 	const paths = result.map((product) => {
 		return {
 			params: {

@@ -16,7 +16,7 @@ import { useState } from 'react';
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-const FormDisabledDemo = () => {
+const FormLayout = () => {
 	return (
 		<Form
 			labelAlign="left"
@@ -68,4 +68,4 @@ const FormDisabledDemo = () => {
 	);
 };
 
-export default () => <FormDisabledDemo />;
+export default FormLayout;
