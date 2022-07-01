@@ -1,91 +1,96 @@
 import {
-	DesktopOutlined,
+	AppstoreOutlined,
 	FileOutlined,
-	PieChartOutlined,
+	HomeFilled,
+	MailOutlined,
+	MenuFoldOutlined,
+	MenuUnfoldOutlined,
+	PauseCircleFilled,
+	SettingOutlined,
 	TeamOutlined,
 	UserOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { Layout, Menu, MenuProps } from 'antd';
+import router, { useRouter } from 'next/router';
+
+import React from 'react';
 import { useState } from 'react';
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Sider } = Layout;
 
-function getItem(
-	label: string,
-	key: string,
-	icon: JSX.Element | undefined,
-	children: { key: any; icon: any; children: any; label: any }[] | undefined
-) {
-	return {
-		key,
-		icon,
-		children,
-		label,
-	};
-}
-
-const items = [
-	getItem('Option 1', '1', <PieChartOutlined />),
-	getItem('Option 2', '2', <DesktopOutlined />),
-	getItem('User', 'sub1', <UserOutlined />, [
-		getItem('Tom', '3'),
-		getItem('Bill', '4'),
-		getItem('Alex', '5'),
-	]),
-	getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-	getItem('Files', '9', <FileOutlined />),
-];
+export let collapsed: boolean;
 
 const HeaderDefault = () => {
 	const [collapsed, setCollapsed] = useState(false);
+	const [current, setCurrent] = useState('mail');
+
+	const items: MenuProps['items'] = [
+		{
+			label: <div onClick={() => router.push('/')}>Accueil</div>,
+			key: 'mail',
+			icon: <MailOutlined />,
+		},
+		{
+			label: <div onClick={() => router.push('/app/signin')}>Connexion</div>,
+			key: 'app',
+			icon: <AppstoreOutlined onClick={() => router.push('/app/signin')} />,
+		},
+		{
+			label: 'Profil',
+			key: 'SubMenu',
+			icon: <SettingOutlined />,
+			children: [
+				{
+					type: 'group',
+					label: 'Item 1',
+					children: [
+						{
+							label: (
+								<div onClick={() => router.push('/app/register')}>Enregistrer</div>
+							),
+
+							key: 'setting:1',
+						},
+						{
+							label: 'Option 2',
+							key: 'setting:2',
+						},
+					],
+				},
+				{
+					type: 'group',
+					label: 'Item 2',
+					children: [
+						{
+							label: 'Option 3',
+							key: 'setting:3',
+						},
+						{
+							label: 'Option 4',
+							key: 'setting:4',
+						},
+					],
+				},
+			],
+		},
+	];
+
+	const onClick: MenuProps['onClick'] = (e) => {
+		console.log('click ', e);
+		setCurrent(e.key);
+	};
+
 	return (
-		<Layout
-			style={{
-				minHeight: '100vh',
-			}}
-		>
-			<Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-				<div className="logo" />
-				<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-			</Sider>
-			<Layout className="site-layout">
-				<Header
-					className="site-layout-background"
-					style={{
-						padding: 0,
-					}}
+		<Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+			<Menu>
+				<Menu
+					onClick={onClick}
+					theme="dark"
+					selectedKeys={[current]}
+					mode="inline"
+					items={items}
 				/>
-				<Content
-					style={{
-						margin: '0 16px',
-					}}
-				>
-					<Breadcrumb
-						style={{
-							margin: '16px 0',
-						}}
-					>
-						<Breadcrumb.Item>User</Breadcrumb.Item>
-						<Breadcrumb.Item>Bill</Breadcrumb.Item>
-					</Breadcrumb>
-					<div
-						className="site-layout-background"
-						style={{
-							padding: 24,
-							minHeight: 360,
-						}}
-					>
-						Bill is a cat.
-					</div>
-				</Content>
-				<Footer
-					style={{
-						textAlign: 'center',
-					}}
-				>
-					Ant Design ©2018 Created by Ant UED
-				</Footer>
-			</Layout>
-		</Layout>
+			</Menu>
+		</Sider>
 	);
 };
 

@@ -15,6 +15,7 @@ import router, { useRouter } from 'next/router';
 
 import React from 'react';
 import { useState } from 'react';
+import HeaderDefault from './HeaderDefault';
 const { Header, Sider } = Layout;
 
 const LayoutDefault = ({ children }) => {
@@ -83,17 +84,7 @@ const LayoutDefault = ({ children }) => {
 				minHeight: '100vh',
 			}}
 		>
-			<Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-				<Menu>
-					<Menu
-						onClick={onClick}
-						theme="dark"
-						selectedKeys={[current]}
-						mode="inline"
-						items={items}
-					/>
-				</Menu>
-			</Sider>
+			<HeaderDefault />
 			<Layout className="site-layout">
 				<Header className="site-layout-background" style={{ padding: 10 }}>
 					{React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {

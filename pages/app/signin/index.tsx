@@ -1,8 +1,8 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, Space } from 'antd';
 
 const Signin = () => {
-	const onFinish = (values) => {
+	const onFinish = (values: any) => {
 		console.log('Received values of form: ', values);
 	};
 
@@ -55,10 +55,12 @@ const Signin = () => {
 			</Form.Item>
 
 			<Form.Item>
-				<Button type="primary" htmlType="submit" className="login-form-button">
-					Log in
-				</Button>
-				Or <a href="">register now!</a>
+				<Space>
+					<Button type="primary" htmlType="submit" className="login-form-button">
+						Log in
+					</Button>
+					Or <a href="/app/register">register now!</a>
+				</Space>
 			</Form.Item>
 		</Form>
 	);
