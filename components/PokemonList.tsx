@@ -1,5 +1,5 @@
 import { Card } from 'antd';
-import { capitalizeFirstLetter } from '../../../libs/utils';
+import { capitalizeFirstLetter } from '../libs/utils';
 
 const PokemonList = ({ pokemon }) => {
 	// console.log(pokemon);

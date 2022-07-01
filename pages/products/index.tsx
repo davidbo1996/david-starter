@@ -1,8 +1,7 @@
-import { Card, Col, Row } from 'antd';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Pagination from './_components/Pagination';
-import PokemonList from './_components/PokemonList';
+import Pagination from '../../components/Pagination';
+import PokemonList from '../../components/PokemonList';
 
 const Products = (props) => {
 	const [pokemon, setPokemon] = useState([]);
