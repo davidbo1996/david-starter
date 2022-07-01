@@ -25,52 +25,30 @@ const HeaderDefault = () => {
 
 	const items: MenuProps['items'] = [
 		{
-			label: <div onClick={() => router.push('/')}>Accueil</div>,
-			key: 'mail',
+			label: <div onClick={() => router.push('/')}>Home</div>,
+			key: 'home',
 			icon: <MailOutlined />,
 		},
 		{
-			label: <div onClick={() => router.push('/app/signin')}>Connexion</div>,
-			key: 'app',
-			icon: <AppstoreOutlined onClick={() => router.push('/app/signin')} />,
+			label: <div onClick={() => router.push('/app/signin')}>Signin</div>,
+			key: 'signin',
+			icon: <AppstoreOutlined />,
 		},
 		{
-			label: 'Profil',
-			key: 'SubMenu',
+			label: <div onClick={() => router.push('/app/profil')}>Profil</div>,
+			key: 'profil',
 			icon: <SettingOutlined />,
-			children: [
-				{
-					type: 'group',
-					label: 'Item 1',
-					children: [
-						{
-							label: (
-								<div onClick={() => router.push('/app/register')}>Enregistrer</div>
-							),
+		},
+		{
+			label: <div onClick={() => router.push('/app/register')}>Sign up</div>,
+			key: 'register',
+			icon: <AppstoreOutlined />,
+		},
 
-							key: 'setting:1',
-						},
-						{
-							label: 'Option 2',
-							key: 'setting:2',
-						},
-					],
-				},
-				{
-					type: 'group',
-					label: 'Item 2',
-					children: [
-						{
-							label: 'Option 3',
-							key: 'setting:3',
-						},
-						{
-							label: 'Option 4',
-							key: 'setting:4',
-						},
-					],
-				},
-			],
+		{
+			label: <div onClick={() => router.push('/app/admin')}>Admin</div>,
+			key: 'admin',
+			icon: <AppstoreOutlined />,
 		},
 	];
 
@@ -81,15 +59,13 @@ const HeaderDefault = () => {
 
 	return (
 		<Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-			<Menu>
-				<Menu
-					onClick={onClick}
-					theme="dark"
-					selectedKeys={[current]}
-					mode="inline"
-					items={items}
-				/>
-			</Menu>
+			<Menu
+				onClick={onClick}
+				theme="dark"
+				selectedKeys={[current]}
+				mode="inline"
+				items={items}
+			/>
 		</Sider>
 	);
 };

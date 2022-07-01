@@ -1,5 +1,6 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Space } from 'antd';
+import Link from 'next/link';
 
 const Signin = () => {
 	const onFinish = (values: any) => {
@@ -49,9 +50,9 @@ const Signin = () => {
 					<Checkbox>Remember me</Checkbox>
 				</Form.Item>
 
-				<a className="login-form-forgot" href="">
+				<Link className="login-form-forgot" href="">
 					Forgot password
-				</a>
+				</Link>
 			</Form.Item>
 
 			<Form.Item>
@@ -59,7 +60,7 @@ const Signin = () => {
 					<Button type="primary" htmlType="submit" className="login-form-button">
 						Log in
 					</Button>
-					Or <a href="/app/register">register now!</a>
+					Or <Link href="/app/register">register now!</Link>
 				</Space>
 			</Form.Item>
 		</Form>
