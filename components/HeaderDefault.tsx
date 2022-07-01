@@ -46,7 +46,7 @@ const HeaderDefault = () => {
 		},
 
 		{
-			label: <div onClick={() => router.push('/app/admin')}>Admin</div>,
+			label: <div onClick={() => router.push('/products')}>Products</div>,
 			key: 'admin',
 			icon: <AppstoreOutlined />,
 		},

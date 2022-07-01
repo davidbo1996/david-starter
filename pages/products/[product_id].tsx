@@ -8,6 +8,22 @@ const Post = (props) => {
 	const pokemon = props.pokemon;
 	const router = useRouter();
 	const { product_id } = router.query;
+	const idx = parseInt(product_id);
+
+	const [currentIndex, setCurrentIndex] = useState(idx);
+
+	function gotoPrevPage() {
+		if (currentIndex > 1) {
+			setCurrentIndex(idx - 1);
+		}
+
+		router.push(`/products/${currentIndex}`);
+	}
+
+	function gotoNextPage() {
+		setCurrentIndex(idx + 1);
+		router.push(`/products/${currentIndex}`);
+	}
 
 	console.log('Pokemon', pokemon);
 
@@ -19,7 +35,7 @@ const Post = (props) => {
 			</Head>
 			<PageHeader
 				className="site-page-header"
-				onBack={() => router.push('/')}
+				onBack={() => router.push('/products')}
 				title={pokemon.name.toUpperCase()}
 			/>
 
@@ -34,8 +50,14 @@ const Post = (props) => {
 				</div>
 
 				<div className="flex flex-row items-center justify-center pt-4 gap-4">
-					<Button type="primary">Previous</Button>
-					<Button type="primary">Next</Button>
+					{currentIndex !== 1 && (
+						<Button onClick={gotoPrevPage} type="primary">
+							Previous
+						</Button>
+					)}
+					<Button onClick={gotoNextPage} type="primary">
+						Next
+					</Button>
 				</div>
 			</Card>
 		</>
