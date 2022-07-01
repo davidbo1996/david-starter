@@ -26,17 +26,18 @@ const Post = (props) => {
 			<Card style={{ width: '100%' }}>
 				<img src={pokemon.sprites.back_default} alt={pokemon.name} />
 				<Divider />
-				<p>
+				<div>
 					<b>Abilities:</b>
 					{pokemon.abilities.map(function (d, idx) {
 						return <div key={idx}> {d.ability.name}</div>;
 					})}
-				</p>
+				</div>
+
+				<div class="flex flex-row items-center justify-center pt-4 gap-4">
+					<Button type="primary">Previous</Button>
+					<Button type="primary">Next</Button>
+				</div>
 			</Card>
-			<div className="flex flex-row items-center justify-center pt-4 gap-4">
-				<Button type="primary">Previous</Button>
-				<Button type="primary">Next</Button>
-			</div>
 		</>
 	);
 };
