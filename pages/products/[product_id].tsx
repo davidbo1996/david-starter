@@ -1,7 +1,7 @@
 import { Button, Card, Col, Divider, PageHeader, Row, Space } from 'antd';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { range } from '../../libs/utils';
 
 const Post = (props) => {
@@ -11,21 +11,27 @@ const Post = (props) => {
 	const idx = parseInt(product_id);
 
 	const [currentIndex, setCurrentIndex] = useState(idx);
+	const [loading, setLoading] = useState(true);
 
 	function gotoPrevPage() {
 		if (currentIndex > 1) {
 			setCurrentIndex(idx - 1);
 		}
-
-		router.push(`/products/${currentIndex}`);
 	}
 
 	function gotoNextPage() {
 		setCurrentIndex(idx + 1);
-		router.push(`/products/${currentIndex}`);
 	}
 
-	console.log('Pokemon', pokemon);
+	useEffect(() => {
+		setLoading(true);
+		router.push(`/products/${currentIndex}`);
+		setLoading(false);
+	}, [currentIndex]);
+
+	// console.log('Pokemon', pokemon);
+
+	if (loading) return 'Loading';
 
 	return (
 		<>

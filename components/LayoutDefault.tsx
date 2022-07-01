@@ -13,7 +13,9 @@ const LayoutDefault = ({ children }) => {
 		>
 			<HeaderDefault />
 			<Layout className="site-layout">
-				<Header className="site-layout-background">David</Header>
+				<Header className="site-layout-background flex justify-end items-end">
+					@David BO
+				</Header>
 				<main>
 					<section style={{ width: '100%', height: '80vh' }}>{children}</section>
 				</main>
