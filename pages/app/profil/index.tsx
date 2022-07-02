@@ -85,8 +85,8 @@ function ProfileUser(props) {
 							</div>
 							<div className="flex flex-col text-xs font-extralight">
 								<b>Required course:</b>{' '}
-								{courses.map((course) => {
-									return <div> {course.title} </div>;
+								{courses.map((course, idx) => {
+									return <div key={idx}> {course.title} </div>;
 								})}
 							</div>
 						</Card>

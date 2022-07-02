@@ -44,7 +44,7 @@ const Jobs = (props) => {
 								<Button
 									onClick={() => router.push(`/courses/${job.course_required}`)}
 								>
-									Lesson 1
+									Environmental and Ecology Management
 								</Button>
 							</p>
 							<div className="flex flex-row justify-end">

@@ -18,7 +18,7 @@ const LayoutDefault = ({ children }) => {
 					{/* <Button type="primary">Log in</Button>
 					<Button>Sign up</Button> */}
 					{/* <Avatar size="large" icon={<UserOutlined />} /> */}
-					<Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}></Avatar>
+					<Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>D</Avatar>
 				</Header>
 				<main>
 					<section>{children}</section>
