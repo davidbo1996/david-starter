@@ -1,5 +1,6 @@
 import { Breadcrumb, Card, Collapse, Rate, Space } from 'antd';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -31,7 +32,7 @@ function Course(props) {
 			</Head>
 			<Breadcrumb>
 				<Breadcrumb.Item>
-					<a href="/courses">Courses</a>
+					<Link href="/courses">Courses</Link>
 				</Breadcrumb.Item>
 				<Breadcrumb.Item>{course.title}</Breadcrumb.Item>
 			</Breadcrumb>

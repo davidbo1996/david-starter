@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Pagination from '../../components/Pagination';
-import PokemonList from '../../components/PokemonList';
 import Head from 'next/head';
 import { Footer } from 'antd/lib/layout/layout';
 import { Card, Checkbox, Rate } from 'antd';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import Image from 'next/image';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 
@@ -30,12 +25,15 @@ const Products = (props) => {
 							key={idx}
 							style={{ width: 450 }}
 							actions={[
-								<div onClick={() => router.push(`/courses/${e.course_id}`)}>
+								<div
+									key={idx}
+									onClick={() => router.push(`/courses/${e.course_id}`)}
+								>
 									<EllipsisOutlined key="ellipsis" />
 								</div>,
 							]}
 						>
-							<h1>{e.title}</h1>
+							<h1 key={idx}>{e.title}</h1>
 							<div className="font-light text-xs">{e.description}</div>
 							<div className="font-light text-xs">
 								<span>
