@@ -2,7 +2,7 @@ import { Button, Card, Col, Divider, PageHeader, Row, Space } from 'antd';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { range } from '../../libs/utils';
+// import { range } from '../libs/utils;
 
 const Post = (props) => {
 	const pokemon = props.pokemon;
@@ -81,19 +81,19 @@ export async function getStaticProps(context) {
 	};
 }
 
-export async function getStaticPaths() {
-	// product id between 0 and 100 ok
-	// id > 100 => Error 404
-	const result = range(1, 100);
-	const paths = result.map((product) => {
-		return {
-			params: {
-				product_id: `${product}`,
-			},
-		};
-	});
+// export async function getStaticPaths() {
+// 	// product id between 0 and 100 ok
+// 	// id > 100 => Error 404
+// 	const result = range(1, 100);
+// 	const paths = result.map((product) => {
+// 		return {
+// 			params: {
+// 				product_id: `${product}`,
+// 			},
+// 		};
+// 	});
 
-	return { paths: paths, fallback: false };
-}
+// 	return { paths: paths, fallback: false };
+// }
 
 export default Post;
