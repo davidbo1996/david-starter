@@ -1,4 +1,5 @@
 import { Breadcrumb, Card, Collapse, Rate, Space } from 'antd';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -8,10 +9,7 @@ function Course(props) {
 	const router = useRouter();
 	const { course_id } = router.query;
 	const courses = props.courses;
-	// console.log('Course_id', course_id);
-	// console.log('Courses', courses);
 	const course = courses.Items.find((e) => e.course_id === course_id);
-	// console.log('Course', course);
 
 	const requirements = course.requirements.split(',');
 	const learns = course.learn_items.split(',');
@@ -23,11 +21,14 @@ function Course(props) {
 	const onChange = (key: string | string[]) => {
 		console.log(key);
 	};
-
 	const contents = JSON.parse(course.course_items);
 
 	return (
 		<>
+			<Head>
+				<title>Courses</title>
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+			</Head>
 			<Breadcrumb>
 				<Breadcrumb.Item>
 					<a href="/courses">Courses</a>
@@ -38,13 +39,6 @@ function Course(props) {
 				<Card style={{ width: 700 }}>
 					<p className="font-bold text-xl">{course.title}</p>
 					<p className="font-light text-xs">{course.description}</p>
-					<p className="font-light text-xs">
-						<span>
-							<Rate tooltips={desc} onChange={setValue} value={course.rating} />
-							{value ? <span className="ant-rate-text">{desc[value - 1]}</span> : ''}
-						</span>
-						{course.rating}
-					</p>
 					<p className="flex flex-row text-xs font-extralight">
 						{course.hours} total hours - {course.instructor_student_count} lectures
 					</p>
@@ -77,22 +71,23 @@ function Course(props) {
 					<Collapse defaultActiveKey={['1']} onChange={onChange}>
 						{contents.map((content, idx) => {
 							return (
-								<>
-									<Panel header={content.title} key={idx}>
-										{content.content.map((e) => {
-											return (
-												<div className="grid grid-cols-2 gap-1  text-xs">
-													<p className="flex flex-row justify-start items-start font-light">
-														{e.title}
-													</p>
-													<p className="flex flex-row justify-end items-end font-semibold">
-														{e.time}
-													</p>
-												</div>
-											);
-										})}
-									</Panel>
-								</>
+								<Panel header={content.title} key={idx}>
+									{content.content.map((e, idx) => {
+										return (
+											<div
+												key={idx}
+												className="grid grid-cols-2 gap-1  text-xs"
+											>
+												<p className="flex flex-row justify-start items-start font-light">
+													{e.title}
+												</p>
+												<p className="flex flex-row justify-end items-end font-semibold">
+													{e.time}
+												</p>
+											</div>
+										);
+									})}
+								</Panel>
 							);
 						})}
 					</Collapse>

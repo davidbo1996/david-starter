@@ -22,15 +22,16 @@ const Products = (props) => {
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<div className="flex flex-col gap-2 items-end">
-				{courses.map((e) => {
+				{courses.map((e, idx) => {
 					return (
 						<Card
+							key={idx}
 							style={{ width: 450 }}
 							actions={[<EllipsisOutlined key="ellipsis" />]}
 						>
 							<h1>{e.title}</h1>
-							<p className="font-light text-xs">{e.description}</p>
-							<p className="font-light text-xs">
+							<div className="font-light text-xs">{e.description}</div>
+							<div className="font-light text-xs">
 								<span>
 									<Rate tooltips={desc} onChange={setValue} value={e.rating} />
 									{value ? (
@@ -40,24 +41,14 @@ const Products = (props) => {
 									)}
 								</span>
 								{e.rating}
-							</p>
-							<p className="flex flex-row text-xs font-extralight">
+							</div>
+							<div className="flex flex-row text-xs font-extralight">
 								{e.hours} total hours - {e.instructor_student_count} lectures
-							</p>
+							</div>
 						</Card>
 					);
 				})}
 			</div>
-
-			{/* <PokemonList pokemon={pokemon} />
-			<div className="pt-8">
-				<Pagination
-					gotoNextPage={nextPageUrl ? gotoNextPage : null}
-					gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
-				/>
-			</div> */}
-			{/* </div>
-		</> */}
 		</>
 	);
 };
