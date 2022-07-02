@@ -8,8 +8,10 @@ import { Card, Checkbox, Rate } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import Image from 'next/image';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router';
 
 const Products = (props) => {
+	const router = useRouter();
 	const courses = props.courses.Items;
 	console.log(courses);
 	const [value, setValue] = useState(3);
@@ -21,13 +23,17 @@ const Products = (props) => {
 				<title>Courses</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
-			<div className="flex flex-col gap-2 items-end">
+			<div className="flex flex-col gap-2 items-center">
 				{courses.map((e, idx) => {
 					return (
 						<Card
 							key={idx}
 							style={{ width: 450 }}
-							actions={[<EllipsisOutlined key="ellipsis" />]}
+							actions={[
+								<div onClick={() => router.push(`/courses/${e.course_id}`)}>
+									<EllipsisOutlined key="ellipsis" />
+								</div>,
+							]}
 						>
 							<h1>{e.title}</h1>
 							<div className="font-light text-xs">{e.description}</div>
