@@ -1,20 +1,30 @@
-import { Breadcrumb, Card, Space } from 'antd';
+import { Breadcrumb, Card, Collapse, Rate, Space } from 'antd';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
+
+const { Panel } = Collapse;
 
 function Course(props) {
 	const router = useRouter();
 	const { course_id } = router.query;
 	const courses = props.courses;
-	console.log('Course_id', course_id);
-	console.log('Courses', courses);
+	// console.log('Course_id', course_id);
+	// console.log('Courses', courses);
 	const course = courses.Items.find((e) => e.course_id === course_id);
-	console.log('Course', course);
+	// console.log('Course', course);
 
 	const requirements = course.requirements.split(',');
 	const learns = course.learn_items.split(',');
 
-	console.log(learns);
-	// console.log(requirements);
+	// console.log(learns);
+	const [value, setValue] = useState(3);
+	const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+
+	const onChange = (key: string | string[]) => {
+		console.log(key);
+	};
+
+	const contents = JSON.parse(course.course_items);
 
 	return (
 		<>
@@ -27,7 +37,17 @@ function Course(props) {
 			<div className="pt-4 flex flex-col justify-center items-center gap-4">
 				<Card style={{ width: 700 }}>
 					<p className="font-bold text-xl">{course.title}</p>
-					<p className="font-light text-sm">{course.description}</p>
+					<p className="font-light text-xs">{course.description}</p>
+					<p className="font-light text-xs">
+						<span>
+							<Rate tooltips={desc} onChange={setValue} value={course.rating} />
+							{value ? <span className="ant-rate-text">{desc[value - 1]}</span> : ''}
+						</span>
+						{course.rating}
+					</p>
+					<p className="flex flex-row text-xs font-extralight">
+						{course.hours} total hours - {course.instructor_student_count} lectures
+					</p>
 				</Card>
 				<div className="flex flex-row gap-2 ">
 					<Card style={{ width: 350 }}>
@@ -53,6 +73,30 @@ function Course(props) {
 						</li>
 					</Card>
 				</div>
+				<Card style={{ width: 700, margin: 20 }}>
+					<Collapse defaultActiveKey={['1']} onChange={onChange}>
+						{contents.map((content, idx) => {
+							return (
+								<>
+									<Panel header={content.title} key={idx}>
+										{content.content.map((e) => {
+											return (
+												<div className="grid grid-cols-2 gap-1  text-xs">
+													<p className="flex flex-row justify-start items-start font-light">
+														{e.title}
+													</p>
+													<p className="flex flex-row justify-end items-end font-semibold">
+														{e.time}
+													</p>
+												</div>
+											);
+										})}
+									</Panel>
+								</>
+							);
+						})}
+					</Collapse>
+				</Card>
 			</div>
 		</>
 	);

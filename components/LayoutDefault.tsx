@@ -21,7 +21,7 @@ const LayoutDefault = ({ children }) => {
 					<Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}></Avatar>
 				</Header>
 				<main>
-					<section style={{ width: '100%', height: '80vh' }}>{children}</section>
+					<section>{children}</section>
 				</main>
 			</Layout>
 		</Layout>

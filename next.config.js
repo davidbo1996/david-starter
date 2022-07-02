@@ -8,6 +8,10 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+
+  images:{
+    domains: ['img.batiweb.com']
+  }
 }
 
 module.exports = nextConfig
