@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Footer } from 'antd/lib/layout/layout';
 import { Alert, Card, Checkbox, Rate } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import {
+	EditOutlined,
+	EllipsisOutlined,
+	PlusCircleOutlined,
+	SettingOutlined,
+} from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
@@ -12,10 +17,10 @@ const Courses = (props) => {
 	console.log(courses);
 	const [value, setValue] = useState(3);
 	const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
-	const [success, setSuccess] = useState(false);
+	const [visible, setVisible] = useState(false);
 
 	function addCourse(e) {
-		// console.log(e);
+		setVisible(true);
 		axios
 			.post('https://pn3cs9mkb1.execute-api.eu-west-1.amazonaws.com/user/course', {
 				user_id: 'user_1',
@@ -24,7 +29,15 @@ const Courses = (props) => {
 			.then((response) => {
 				console.log(response);
 			});
+
+		setTimeout(() => {
+			setVisible(false);
+		}, 2000);
 	}
+
+	const handleClose = () => {
+		setVisible(false);
+	};
 
 	return (
 		<>
@@ -33,7 +46,14 @@ const Courses = (props) => {
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<div className="flex flex-col gap-2 items-center">
-				<Alert message="Success Text" type="success" />
+				{visible ? (
+					<Alert
+						message="You add this course"
+						type="success"
+						closable
+						afterClose={handleClose}
+					/>
+				) : null}
 				{courses.map((course, idx) => {
 					return (
 						<Card
@@ -44,7 +64,7 @@ const Courses = (props) => {
 									key={idx}
 									onClick={() => router.push(`/courses/${course.course_id}`)}
 								>
-									<EllipsisOutlined key="ellipsis" />
+									<SettingOutlined key="setting" />
 								</div>,
 								<div
 									key={idx}
@@ -52,7 +72,7 @@ const Courses = (props) => {
 										addCourse(course);
 									}}
 								>
-									<SettingOutlined key="setting" />
+									<PlusCircleOutlined key={idx} />
 								</div>,
 							]}
 						>
