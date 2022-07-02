@@ -1,13 +1,7 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Footer } from 'antd/lib/layout/layout';
 import { Alert, Card, Checkbox, Rate } from 'antd';
-import {
-	EditOutlined,
-	EllipsisOutlined,
-	PlusCircleOutlined,
-	SettingOutlined,
-} from '@ant-design/icons';
+import { PlusCircleOutlined, SettingOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 

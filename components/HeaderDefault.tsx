@@ -1,4 +1,9 @@
-import { AppstoreOutlined, HomeOutlined, SettingOutlined } from '@ant-design/icons';
+import {
+	AppstoreOutlined,
+	HomeOutlined,
+	SettingOutlined,
+	UsergroupAddOutlined,
+} from '@ant-design/icons';
 import { Layout, Menu, MenuProps } from 'antd';
 import MenuItem from 'antd/lib/menu/MenuItem';
 import router, { useRouter } from 'next/router';
@@ -56,11 +61,11 @@ const HeaderDefault = () => {
 			key: 'course',
 			icon: <AppstoreOutlined />,
 		},
-		// {
-		// 	label: <div onClick={() => router.push('/courses')}>My course</div>,
-		// 	key: 'myCourse',
-		// 	icon: <AppstoreOutlined />,
-		// },
+		{
+			label: <div onClick={() => router.push('/jobs')}>Jobs</div>,
+			key: 'job',
+			icon: <UsergroupAddOutlined />,
+		},
 	];
 
 	const onClick: MenuProps['onClick'] = (e) => {
