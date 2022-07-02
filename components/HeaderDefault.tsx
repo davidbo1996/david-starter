@@ -56,11 +56,11 @@ const HeaderDefault = () => {
 			key: 'course',
 			icon: <AppstoreOutlined />,
 		},
-		{
-			label: <div onClick={() => router.push('/courses')}>My course</div>,
-			key: 'myCourse',
-			icon: <AppstoreOutlined />,
-		},
+		// {
+		// 	label: <div onClick={() => router.push('/courses')}>My course</div>,
+		// 	key: 'myCourse',
+		// 	icon: <AppstoreOutlined />,
+		// },
 	];
 
 	const onClick: MenuProps['onClick'] = (e) => {

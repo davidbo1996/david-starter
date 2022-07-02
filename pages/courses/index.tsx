@@ -1,16 +1,30 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Footer } from 'antd/lib/layout/layout';
-import { Card, Checkbox, Rate } from 'antd';
+import { Alert, Card, Checkbox, Rate } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
-const Products = (props) => {
+const Courses = (props) => {
 	const router = useRouter();
 	const courses = props.courses.Items;
 	console.log(courses);
 	const [value, setValue] = useState(3);
 	const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+	const [success, setSuccess] = useState(false);
+
+	function addCourse(e) {
+		// console.log(e);
+		axios
+			.post('https://pn3cs9mkb1.execute-api.eu-west-1.amazonaws.com/user/course', {
+				user_id: 'user_1',
+				course_id: e.course_id,
+			})
+			.then((response) => {
+				console.log(response);
+			});
+	}
 
 	return (
 		<>
@@ -19,7 +33,8 @@ const Products = (props) => {
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<div className="flex flex-col gap-2 items-center">
-				{courses.map((e, idx) => {
+				<Alert message="Success Text" type="success" />
+				{courses.map((course, idx) => {
 					return (
 						<Card
 							key={idx}
@@ -27,27 +42,40 @@ const Products = (props) => {
 							actions={[
 								<div
 									key={idx}
-									onClick={() => router.push(`/courses/${e.course_id}`)}
+									onClick={() => router.push(`/courses/${course.course_id}`)}
 								>
 									<EllipsisOutlined key="ellipsis" />
 								</div>,
+								<div
+									key={idx}
+									onClick={() => {
+										addCourse(course);
+									}}
+								>
+									<SettingOutlined key="setting" />
+								</div>,
 							]}
 						>
-							<h1 key={idx}>{e.title}</h1>
-							<div className="font-light text-xs">{e.description}</div>
+							<h1 key={idx}>{course.title}</h1>
+							<div className="font-light text-xs">{course.description}</div>
 							<div className="font-light text-xs">
 								<span>
-									<Rate tooltips={desc} onChange={setValue} value={e.rating} />
+									<Rate
+										tooltips={desc}
+										onChange={setValue}
+										value={course.rating}
+									/>
 									{value ? (
 										<span className="ant-rate-text">{desc[value - 1]}</span>
 									) : (
 										''
 									)}
 								</span>
-								{e.rating}
+								{course.rating}
 							</div>
 							<div className="flex flex-row text-xs font-extralight">
-								{e.hours} total hours - {e.instructor_student_count} lectures
+								{course.hours} total hours - {course.instructor_student_count}{' '}
+								lectures
 							</div>
 						</Card>
 					);
@@ -67,4 +95,4 @@ export async function getServerSideProps(context) {
 	};
 }
 
-export default Products;
+export default Courses;
